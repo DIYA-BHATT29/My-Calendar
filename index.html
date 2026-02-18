@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calendra Lite</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">🗓️</div>
+      <div>
+        <h1>Calendra Lite</h1>
+        <p class="subtitle">Simple calendar with events + search + reminders</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <h2>Calendar</h2>
+          <p class="muted">Click a date to view events. Select an event to Edit/Delete from the side.</p>
+
+          <!-- Month/Year moved here (top of calendar) -->
+          <div class="monthbar">
+            <button id="prevBtn" class="btn" type="button" aria-label="Previous month">←</button>
+            <div id="monthLabel" class="month-label" aria-live="polite">—</div>
+            <button id="nextBtn" class="btn" type="button" aria-label="Next month">→</button>
+            <button id="todayBtn" class="btn ghost" type="button">Today</button>
+          </div>
+        </div>
+
+        <div class="head-right">
+          <input id="searchInput" class="search" type="search" placeholder="Search events…" />
+          <!-- TOP ADD BUTTON REMOVED (as you wanted) -->
+        </div>
+      </div>
+
+      <div class="dow">
+        <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+      </div>
+
+      <div id="grid" class="grid" aria-label="Calendar grid"></div>
+    </section>
+
+    <aside class="panel side">
+      <div class="panel-head">
+        <h2>Selected Day</h2>
+        <p id="dayLabel" class="muted">—</p>
+      </div>
+
+      <div id="dayList" class="day-list"></div>
+
+      <!-- SIDE BUTTONS: Add/Edit/Delete -->
+      <div class="panel-foot">
+        <button id="addBtn" class="btn primary" type="button">+ Add Event</button>
+        <button id="editBtn" class="btn" type="button">Edit</button>
+        <button id="deleteSideBtn" class="btn danger" type="button">Delete</button>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Modal -->
+  <div id="backdrop" class="backdrop" hidden></div>
+  <dialog id="eventModal" class="modal" aria-labelledby="modalTitle">
+    <form id="eventForm" class="modal-form" method="dialog">
+      <div class="modal-head">
+        <div>
+          <div id="modalTitle" class="modal-title">New event</div>
+          <div id="modalSub" class="modal-sub">—</div>
+        </div>
+        <button id="closeBtn" class="btn ghost" type="button" aria-label="Close">✕</button>
+      </div>
+
+      <div class="form">
+        <label class="field">
+          <span>Event name *</span>
+          <input id="titleInput" required maxlength="60" placeholder="e.g., Birthday / Meeting" />
+        </label>
+
+        <label class="field">
+          <span>Event date *</span>
+          <input id="dateInput" type="date" required />
+        </label>
+
+        <div class="row">
+          <label class="field">
+            <span>Start (optional)</span>
+            <input id="startInput" type="time" />
+          </label>
+          <label class="field">
+            <span>End (optional)</span>
+            <input id="endInput" type="time" />
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Description</span>
+          <textarea id="descInput" rows="3" maxlength="500" placeholder="Optional notes"></textarea>
+        </label>
+
+        <label class="field">
+          <span>Reminder</span>
+          <select id="remindInput">
+            <option value="off">Off</option>
+            <option value="popup">Popup (Yesterday + Today)</option>
+          </select>
+          <div class="hint">Popup will show once per day for events with Reminder enabled.</div>
+        </label>
+
+        <div id="conflictBox" class="callout warn" hidden>
+          <b>Conflict detected</b>
+          <div class="muted">This overlaps with another event on the same day/time.</div>
+        </div>
+      </div>
+
+      <div class="modal-foot">
+        <button id="deleteBtn" class="btn danger" type="button" hidden>Delete</button>
+        <div class="spacer"></div>
+        <button id="cancelBtn" class="btn ghost" type="button">Cancel</button>
+        <button id="saveBtn" class="btn primary" type="submit">Save</button>
+      </div>
+
+      <input type="hidden" id="idInput" />
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
