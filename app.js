@@ -103,6 +103,7 @@
 
   // ---------- RENDER CALENDAR (ONLY CURRENT MONTH DAYS) ----------
   function render(){
+    let anyMatch = false;
     const y = viewDate.getFullYear();
     const m = viewDate.getMonth();
     els.monthLabel.textContent = viewDate.toLocaleString(undefined, { month:"long", year:"numeric" });
@@ -134,13 +135,41 @@
         els.grid.appendChild(cell);
         return;
       }
+      let noResultEl = document.getElementById("noResults");
+
+       if(!noResultEl){
+        noResultEl = document.createElement("div");
+        noResultEl.id = "noResults";
+        noResultEl.style.textAlign = "center";
+        noResultEl.style.padding = "10px";
+        noResultEl.style.fontWeight = "bold";
+        noResultEl.style.color = "red";
+        els.grid.parentNode.appendChild(noResultEl);
+    }
+
+      if(q && !anyMatch){
+        noResultEl.textContent = "No events found";
+        noResultEl.style.display = "block";
+      } else {
+        noResultEl.style.display = "none";
+     }
 
       const date = cellData.date;
       const key = toDateKey(date);
 
-      const dayEvents = getEventsByDate(key)
-        .filter(ev => !q || formatSearch(ev).includes(q))
-        .sort((a,b) => (a.start||"").localeCompare(b.start||""));
+      const allEvents = getEventsByDate(key);
+
+      const dayEvents = allEvents
+      .filter(ev => !q || formatSearch(ev).includes(q))
+      .sort((a,b) => (a.start||"").localeCompare(b.start||""));
+
+      if(dayEvents.length > 0){
+      anyMatch = true;
+      } 
+
+      if(q && dayEvents.length === 0){
+        cell.style.display = "none";
+      }
 
       cell.className = "cell";
       if(key === toDateKey(new Date())) cell.classList.add("today");
