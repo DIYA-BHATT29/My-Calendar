@@ -7,6 +7,7 @@
     nextBtn: $("nextBtn"),
     todayBtn: $("todayBtn"),
     monthLabel: $("monthLabel"),
+    yearSelect: $("yearSelect"),
 
     // calendar + side
     grid: $("grid"),
@@ -59,7 +60,28 @@
     render();
     renderDayPanel();
     checkPopupReminders();
+    initYearDropdown();
   }
+  function initYearDropdown(){
+  const currentYear = new Date().getFullYear();
+  const start = currentYear - 50;
+  const end = currentYear + 50;
+
+  for(let y = start; y <= end; y++){
+    const option = document.createElement("option");
+    option.value = y;
+    option.textContent = y;
+    els.yearSelect.appendChild(option);
+  }
+
+  els.yearSelect.value = viewDate.getFullYear();
+
+  els.yearSelect.addEventListener("change", function(){
+    const selectedYear = parseInt(this.value);
+    viewDate = new Date(selectedYear, viewDate.getMonth(), 1);
+    render();
+  });
+}
 
   function bind(){
     els.prevBtn.addEventListener("click", () => { viewDate = addMonths(viewDate, -1); render(); });
@@ -104,6 +126,7 @@
   // ---------- RENDER CALENDAR (ONLY CURRENT MONTH DAYS) ----------
   function render(){
     const y = viewDate.getFullYear();
+    els.yearSelect.value = y;
     const m = viewDate.getMonth();
     els.monthLabel.textContent = viewDate.toLocaleString(undefined, { month:"long", year:"numeric" });
 

@@ -26,7 +26,12 @@
           <!-- Month/Year moved here (top of calendar) -->
           <div class="monthbar">
             <button id="prevBtn" class="btn" type="button" aria-label="Previous month">←</button>
-            <div id="monthLabel" class="month-label" aria-live="polite">—</div>
+            
+           <div class="month-year-group">
+           <div id="monthLabel" class="month-label" aria-live="polite">—</div>
+           <select id="yearSelect" class="year-select" aria-label="Select year"></select>
+           </div>
+
             <button id="nextBtn" class="btn" type="button" aria-label="Next month">→</button>
             <button id="todayBtn" class="btn ghost" type="button">Today</button>
           </div>
