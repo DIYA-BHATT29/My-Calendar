@@ -14,8 +14,6 @@
   --star-pattern: radial-gradient(1px 1px at 5px 8px, #e9d5ff 1px, transparent 1px),
                   radial-gradient(1px 1px at 15px 20px, #fbcfe8 1px, transparent 1px),
                   radial-gradient(1.5px 1.5px at 30px 12px, #cbd5e1 1.5px, transparent 1.5px);
-  background-color: var(--bg);
-  background-image: var(--star-pattern);
   background-size: 40px 40px;
 }
 *{box-sizing:border-box}
@@ -28,6 +26,9 @@ body{
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg);
+  background-image: var(--star-pattern);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 .topbar{
   position:sticky;
@@ -488,3 +489,166 @@ h1{margin:0;font-size:16px; font-weight:700; letter-spacing:.2px; color:#514e6b;
   opacity: 0.6;
   filter: drop-shadow(0 2px 2px rgba(185,164,255,0.4));
 }
+/* 🌙 DARK MODE THEME */
+body.dark {
+  background: #0f172a;
+  color: #e5e7eb;
+}
+
+/* main container */
+body.dark .container,
+body.dark .calendar,
+body.dark .side,
+body.dark .panel {
+  background: #1e293b;
+  color: #e5e7eb;
+  box-shadow: none;
+}
+
+/* cards / cells */
+body.dark .cell {
+  background: #334155;
+  border-color: #475569;
+}
+
+/* headings */
+body.dark h1,
+body.dark h2,
+body.dark h3 {
+  color: #f1f5f9;
+}
+
+/* buttons */
+body.dark .btn {
+  background: #334155;
+  color: #f1f5f9;
+  border: 1px solid #475569;
+}
+
+/* search input */
+body.dark input,
+body.dark textarea {
+  background: #1e293b;
+  color: #fff;
+  border: 1px solid #475569;
+}
+
+/* modal */
+body.dark dialog {
+  background: #1e293b;
+  color: white;
+}
+/* 🌙 Improve text visibility */
+body.dark {
+  color: #f1f5f9;
+}
+
+/* headings */
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark .title {
+  color: #ffffff;
+}
+
+/* small text / description */
+body.dark p,
+body.dark .meta,
+body.dark .t {
+  color: #cbd5e1;
+}
+
+/* calendar day names (Sun Mon Tue...) */
+body.dark .weekday,
+body.dark .weekdays div {
+  background: #eaecf0;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+/* date numbers inside cells */
+body.dark .cell .date span:first-child {
+  color: #e2e8f0;
+  font-weight: 700;
+}
+
+/* event chips text */
+body.dark .event-chip {
+  color: #ffffff;
+}
+
+/* side panel selected day box */
+body.dark .day-item {
+  background: #334155;
+  color: #f1f5f9;
+}
+
+/* buttons text */
+body.dark .btn,
+body.dark .btn.ghost {
+  color: #f1f5f9;
+}
+
+/* input placeholder text */
+body.dark input::placeholder {
+  color: #94a3b8;
+}
+
+/* icons inside buttons */
+body.dark button {
+  color: #e9f0f7;
+}
+/* --------------------------
+   DARK MODE STYLES
+-------------------------- */
+
+body.dark {
+  --bg: #0f172a;
+  background-color: var(--bg);
+  background-image: none;
+  color: #e5e7eb;
+}
+
+body.dark .weekday {
+  color: #ffffff;
+}
+
+body.dark .cell .date span:first-child {
+  color: #ffffff;
+  opacity: 0.9;
+}
+
+body.dark .day-item .title {
+  color: #ffffff;
+}
+
+body.dark .day-item .meta {
+  color: #cbd5e1;
+}
+
+body.dark #themeToggle {
+  background: #2b3648;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+body.dark .search {
+  background: #1e293b;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+body.dark .cell:hover {
+  box-shadow: 0 0 0 1px #7c9cff, 0 0 12px rgba(124,156,255,0.25);
+}
+body.dark .wrap,
+body.dark .panel,
+body.dark .panel.side,
+body.dark .modal,
+body.dark .grid {
+  background-color: #1e293b;
+  border-color: #334155;
+  color: #f1f5f9;
+  box-shadow: none;
+}
+

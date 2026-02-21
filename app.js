@@ -55,11 +55,12 @@
   init();
 
   function init(){
-    bind();
-    render();
-    renderDayPanel();
-    checkPopupReminders();
-  }
+  bind();
+  initTheme();  
+  render();
+  renderDayPanel();
+  checkPopupReminders();
+}
 
   function bind(){
     els.prevBtn.addEventListener("click", () => { viewDate = addMonths(viewDate, -1); render(); });
@@ -509,4 +510,26 @@
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => { el.style.opacity = "0"; }, 1600);
   }
+  function initTheme(){
+  const btn = document.getElementById("themeToggle");
+
+  // load saved theme
+  const saved = localStorage.getItem("calendar_theme");
+  if(saved === "dark"){
+    document.body.classList.add("dark");
+    btn.textContent = "☀️ Light";
+  }
+
+  btn.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+
+    const isDark = document.body.classList.contains("dark");
+
+    // change button text
+    btn.textContent = isDark ? "☀️ Light" : "🌙 Dark";
+
+    // save preference
+    localStorage.setItem("calendar_theme", isDark ? "dark" : "light");
+  });
+}
 })();
