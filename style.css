@@ -120,8 +120,151 @@ h1{margin:0;font-size:16px; font-weight:700; letter-spacing:.2px; color:#514e6b;
   grid-template-columns: 1.6fr .9fr;
   gap:20px;                    
 }
+
+/* ---------- RESPONSIVE BREAKPOINTS ---------- */
 @media (max-width:980px){
   .wrap{ grid-template-columns:1fr; }
+}
+
+@media (max-width:768px){
+  .wrap{
+    padding: 0 12px;
+    margin: 12px auto 30px;
+    gap: 14px;
+  }
+
+  .topbar{
+    padding: 12px 14px;
+  }
+
+  .panel-head{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .head-right{
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search{
+    width: 100%;
+    min-width: unset;
+  }
+
+  .monthbar{
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .month-label{
+    min-width: unset;
+    font-size: 13px;
+  }
+
+  .dow{
+    padding: 0 12px 8px;
+    gap: 4px;
+    font-size: 11px;
+  }
+
+  .dow > div{
+    padding: 6px 4px;
+    font-size: 11px;
+  }
+
+  .grid{
+    padding: 0 12px 12px;
+    gap: 6px;
+  }
+
+  .cell{
+    min-height: 70px;
+    padding: 8px 6px;
+    border-radius: 16px;
+    gap: 4px;
+  }
+
+  .cell .date{
+    font-size: 11px;
+  }
+
+  .event-chip{
+    font-size: 10px;
+    padding: 4px 6px;
+    border-radius: 12px;
+  }
+
+  .panel-foot{
+    flex-wrap: wrap;
+    justify-content: stretch;
+    gap: 8px;
+  }
+
+  .panel-foot .btn{
+    flex: 1;
+    text-align: center;
+    padding: 10px 8px;
+    font-size: 13px;
+  }
+
+  .day-list{
+    padding: 0 12px 10px;
+  }
+
+  .day-item{
+    padding: 12px;
+    border-radius: 20px;
+  }
+}
+
+@media (max-width:480px){
+  h1{ font-size: 14px; }
+
+  .logo{
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+  }
+
+  .btn{
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .grid{
+    gap: 4px;
+    padding: 0 8px 8px;
+  }
+
+  .cell{
+    min-height: 55px;
+    padding: 6px 4px;
+    border-radius: 12px;
+  }
+
+  .cell .date{
+    font-size: 10px;
+  }
+
+  .event-chip{
+    display: none; /* hide chips on very small screens, pill count still shows */
+  }
+
+  .pill{
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+
+  .modal{
+    border-radius: 24px;
+  }
+
+  .panel{
+    border-radius: 20px;
+  }
 }
 
 .panel{
@@ -517,7 +660,6 @@ body.dark {
   color: #e5e7eb;
 }
 
-/* main container */
 body.dark .container,
 body.dark .calendar,
 body.dark .side,
@@ -527,27 +669,23 @@ body.dark .panel {
   box-shadow: none;
 }
 
-/* cards / cells */
 body.dark .cell {
   background: #334155;
   border-color: #475569;
 }
 
-/* headings */
 body.dark h1,
 body.dark h2,
 body.dark h3 {
   color: #f1f5f9;
 }
 
-/* buttons */
 body.dark .btn {
   background: #334155;
   color: #f1f5f9;
   border: 1px solid #475569;
 }
 
-/* search input */
 body.dark input,
 body.dark textarea {
   background: #1e293b;
@@ -555,17 +693,15 @@ body.dark textarea {
   border: 1px solid #475569;
 }
 
-/* modal */
 body.dark dialog {
   background: #1e293b;
   color: white;
 }
-/* 🌙 Improve text visibility */
+
 body.dark {
   color: #f1f5f9;
 }
 
-/* headings */
 body.dark h1,
 body.dark h2,
 body.dark h3,
@@ -573,14 +709,12 @@ body.dark .title {
   color: #ffffff;
 }
 
-/* small text / description */
 body.dark p,
 body.dark .meta,
 body.dark .t {
   color: #cbd5e1;
 }
 
-/* calendar day names (Sun Mon Tue...) */
 body.dark .weekday,
 body.dark .weekdays div {
   background: #eaecf0;
@@ -588,41 +722,32 @@ body.dark .weekdays div {
   font-weight: 600;
 }
 
-/* date numbers inside cells */
 body.dark .cell .date span:first-child {
   color: #e2e8f0;
   font-weight: 700;
 }
 
-/* event chips text */
 body.dark .event-chip {
   color: #ffffff;
 }
 
-/* side panel selected day box */
 body.dark .day-item {
   background: #334155;
   color: #f1f5f9;
 }
 
-/* buttons text */
 body.dark .btn,
 body.dark .btn.ghost {
   color: #f1f5f9;
 }
 
-/* input placeholder text */
 body.dark input::placeholder {
   color: #94a3b8;
 }
 
-/* icons inside buttons */
 body.dark button {
   color: #e9f0f7;
 }
-/* --------------------------
-   DARK MODE STYLES
--------------------------- */
 
 body.dark {
   --bg: #0f172a;
@@ -673,4 +798,3 @@ body.dark .grid {
   color: #f1f5f9;
   box-shadow: none;
 }
-
