@@ -120,6 +120,31 @@
           <textarea id="descInput" rows="3" maxlength="500" placeholder="Optional notes"></textarea>
         </label>
 
+        <!--Adding repeatCheckbox-->
+        <div class="row items-center">
+            <label class="checkbox-field">
+              <input id="repeatCheckbox" type="checkbox" />
+              <span>Repeat Event</span>
+            </label>
+        </div>
+
+        <div id="repeatOptions" class="field" hidden>
+         <span>Frequency</span>
+         <select id="repeatFrequency">
+          <option value="daily">Daily</option>
+          <option value="weekly">Weekly</option>
+          <option value="monthly">Monthly</option>
+         </select>
+  
+         <label class="field mt-10">
+          <span>Repeat Until *</span>
+          <input id="repeatUntilInput" type="date" />
+         </label>
+         <div class="hint">Events will be generated up to this date.</div>
+         </div>
+          <!---->
+
+
         <label class="field">
           <span>Reminder</span>
           <select id="remindInput">
