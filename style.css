@@ -89,6 +89,19 @@ h1{margin:0;font-size:16px; font-weight:700; letter-spacing:.2px; color:#514e6b;
   border-color: rgba(255,255,255,0.8);
 }
 .btn.primary:hover{ background: linear-gradient(145deg, var(--primary2), var(--primary)); }
+/* Clear All - Light Blue Pill */
+.btn.clear-custom{
+  background: linear-gradient(145deg, #dbeafe, #bfdbfe);
+  color: #1e3a8a;
+  border: 1px solid rgba(59,130,246,0.3);
+  border-radius: 30px;
+  box-shadow: 0 8px 16px rgba(59,130,246,0.2);
+}
+
+.btn.clear-custom:hover{
+  background: linear-gradient(145deg, #bfdbfe, #93c5fd);
+  box-shadow: 0 12px 24px rgba(59,130,246,0.3);
+}
 
 .btn.ghost{
   background: rgba(255,255,255,0.4);
@@ -836,4 +849,14 @@ body.dark .grid {
   border-color: #334155;
   color: #f1f5f9;
   box-shadow: none;
+}
+/* Dark mode - Clear All Button */
+body.dark .btn.clear-custom{
+  background: #3b82f6;
+  color: white;
+  border: none;
+}
+
+body.dark .btn.clear-custom:hover{
+  background: #2563eb;
 }

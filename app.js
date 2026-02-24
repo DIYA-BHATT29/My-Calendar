@@ -20,6 +20,7 @@
     editBtn: $("editBtn"),
     deleteSideBtn: $("deleteSideBtn"),
     exportBtn: $("exportBtn"),
+    clearAllBtn: $("clearAllBtn"),
 
     // modal
     modal: $("eventModal"),
@@ -136,6 +137,17 @@ function initMonthDropdown(){
     });
 
     els.exportBtn.addEventListener("click", exportEvents);
+    els.clearAllBtn.addEventListener("click", () => {
+  if(!confirm("Are you sure you want to delete ALL events?")) return;
+
+  events = [];
+  saveEvents(events);
+
+  selectedEventId = null;
+  render();
+  renderDayPanel();
+  toast("All events cleared");
+});
 
     els.closeBtn.addEventListener("click", closeModal);
     els.cancelBtn.addEventListener("click", closeModal);
