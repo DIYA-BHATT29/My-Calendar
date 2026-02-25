@@ -41,8 +41,15 @@
     endInput: $("endInput"),
     descInput: $("descInput"),
     remindInput: $("remindInput"),
+    // NEW: Recurring Logic Elements
+    repeatCheckbox: $("repeatCheckbox"),
+    repeatOptions: $("repeatOptions"),
+    repeatFrequency: $("repeatFrequency"),
+    repeatUntilInput: $("repeatUntilInput"),
 
+    
     conflictBox: $("conflictBox"),
+                   
   };
 
   const STORAGE_KEY = "calendra_lite_events_v2";
@@ -161,7 +168,18 @@ function initMonthDropdown(){
     els.deleteBtn.addEventListener("click", onDelete);
 
     ["dateInput","startInput","endInput"].forEach(id => $(id).addEventListener("input", () => updateConflictWarning(editingId)));
+    // NEW: Recurring UI Toggle
+    els.repeatCheckbox.addEventListener('change', () => {
+        els.repeatOptions.hidden = !els.repeatCheckbox.checked;
+        if (els.repeatCheckbox.checked) {
+            // Set default end date to 1 month from today
+            const defaultDate = new Date();
+            defaultDate.setMonth(defaultDate.getMonth() + 1);
+            els.repeatUntilInput.value = toDateKey(defaultDate);
+        }
+    });
   }
+
 
   // ---------- RENDER CALENDAR (ONLY CURRENT MONTH DAYS) ----------
   function render(){
@@ -379,6 +397,12 @@ if(q){
     els.descInput.value = ev.description || "";
     els.remindInput.value = ev.remindMode || "off";
 
+    // NEW: Reset Recurring Toggle
+    els.repeatCheckbox.checked = false;
+    els.repeatOptions.hidden = true;
+    
+    els.conflictBox.hidden = true;
+
     updateConflictWarning(editingId);
     showModal();
   }
@@ -427,9 +451,35 @@ if(q){
     }
 
     // upsert
-    const idx = events.findIndex(e => e.id === ev.id);
-    if(idx >= 0) events[idx] = ev;
-    else events.push(ev);
+    let datesToProcess = [ev.date];
+
+    if (els.repeatCheckbox.checked) {
+        const startDate = new Date(ev.date + "T00:00:00");
+        const endDate = new Date(els.repeatUntilInput.value + "T00:00:00");
+        const freq = els.repeatFrequency.value;
+
+        let current = new Date(startDate);
+        while (true) {
+            if (freq === "daily") current.setDate(current.getDate() + 1);
+            else if (freq === "weekly") current.setDate(current.getDate() + 7);
+            else if (freq === "monthly") current.setMonth(current.getMonth() + 1);
+
+            if (current > endDate) break;
+            datesToProcess.push(toDateKey(current));
+        }
+    }
+    datesToProcess.forEach(dateStr => {
+        const instanceEv = { ...ev, date: dateStr };
+        
+        // If it's a generated repeat, give it a new unique ID
+        if (dateStr !== ev.date) {
+            instanceEv.id = safeUUID();
+        }
+
+    const idx = events.findIndex(e => e.id === instanceEv.id);
+    if(idx >= 0) events[idx] = instanceEv;
+    else events.push(instanceEv);
+    });
 
     saveEvents(events);
 

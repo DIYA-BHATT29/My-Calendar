@@ -860,3 +860,94 @@ body.dark .btn.clear-custom{
 body.dark .btn.clear-custom:hover{
   background: #2563eb;
 }
+/* ---------- RECURRING EVENT STYLING ---------- */
+
+/* Container for the checkbox and label */
+.items-center { 
+  display: flex; 
+  align-items: center; 
+  gap: 12px; 
+  padding: 8px 4px;
+}
+
+.mt-10 { margin-top: 10px; }
+
+/* The custom checkbox field */
+.checkbox-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: #7b6f98;
+  transition: transform 0.2s ease;
+}
+
+.checkbox-field:hover {
+  transform: translateX(4px);
+}
+
+/* Custom Checkbox Appearance */
+.checkbox-field input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 8px; /* Matching your pill/chip rounded style */
+  border: 1.5px solid rgba(185, 164, 255, 0.4);
+  background: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 8px rgba(185, 164, 255, 0.1);
+}
+
+.checkbox-field input[type="checkbox"]:checked {
+  background: var(--primary);
+  border-color: var(--primary2);
+}
+
+/* The "Check" mark */
+.checkbox-field input[type="checkbox"]:checked::after {
+  content: "✓";
+  position: absolute;
+  color: #2d2d3a;
+  font-size: 14px;
+  font-weight: 800;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.checkbox-field input[type="checkbox"]:focus {
+  box-shadow: 0 0 0 4px var(--focus);
+}
+
+/* Repeat Options Container - Glassmorphism style */
+#repeatOptions {
+  background: rgba(185, 164, 255, 0.05);
+  border: 1px dashed rgba(185, 164, 255, 0.4);
+  padding: 16px;
+  border-radius: 24px;
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: float 6s infinite ease-in-out; /* Matching your existing animations */
+}
+
+/* 🌙 DARK MODE SUPPORT FOR REPEAT BUTTON*/
+body.dark .checkbox-field span {
+  color: #cbd5e1;
+}
+
+body.dark .checkbox-field input[type="checkbox"] {
+  background: #9aa2ac;
+  border-color: #475569;
+}
+
+body.dark #repeatOptions {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: #475569;
+}
