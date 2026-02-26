@@ -459,6 +459,11 @@ h1{margin:0;font-size:16px; font-weight:700; letter-spacing:.2px; color:#514e6b;
   box-shadow: 0 0 0 4px rgba(185,164,255,0.15);
 }
 
+.cell.selected {
+  background: rgba(185, 164, 255, 0.4);
+  border: 2px solid var(--primary);
+}
+
 .cell.empty{
   cursor: default;
   opacity:.5;
@@ -850,6 +855,10 @@ body.dark .grid {
   color: #f1f5f9;
   box-shadow: none;
 }
+body.dark .cell.selected {
+  background: rgba(124, 156, 255, 0.25);
+  border-color: #7c9cff;
+}
 /* Dark mode - Clear All Button */
 body.dark .btn.clear-custom{
   background: #3b82f6;
@@ -860,6 +869,7 @@ body.dark .btn.clear-custom{
 body.dark .btn.clear-custom:hover{
   background: #2563eb;
 }
+
 /* ---------- RECURRING EVENT STYLING ---------- */
 
 /* Container for the checkbox and label */
@@ -894,7 +904,7 @@ body.dark .btn.clear-custom:hover{
   -webkit-appearance: none;
   width: 22px;
   height: 22px;
-  border-radius: 8px; /* Matching your pill/chip rounded style */
+  border-radius: 8px;
   border: 1.5px solid rgba(185, 164, 255, 0.4);
   background: rgba(255, 255, 255, 0.8);
   cursor: pointer;
@@ -934,10 +944,10 @@ body.dark .btn.clear-custom:hover{
   display: flex;
   flex-direction: column;
   gap: 12px;
-  animation: float 6s infinite ease-in-out; /* Matching your existing animations */
+  animation: float 6s infinite ease-in-out;
 }
 
-/* 🌙 DARK MODE SUPPORT FOR REPEAT BUTTON*/
+/* 🌙 DARK MODE SUPPORT FOR REPEAT BUTTON */
 body.dark .checkbox-field span {
   color: #cbd5e1;
 }
