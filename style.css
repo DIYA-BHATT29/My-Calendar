@@ -584,6 +584,19 @@ h1{margin:0;font-size:16px; font-weight:700; letter-spacing:.2px; color:#514e6b;
   color: #fff;
 }
 
+.day-item[data-color="red"] {
+    background-color: #fef2f2;
+    border-color: #fecaca;
+}
+.day-item[data-color="blue"] {
+    background-color: #eff6ff;
+    border-color: #bfdbfe;
+}
+.day-item[data-color="green"] {
+    background-color: #f0fdf4;
+    border-color: #bbf7d0;
+}
+
 .panel-foot{
   padding:16px 20px 20px;
   display:flex;
