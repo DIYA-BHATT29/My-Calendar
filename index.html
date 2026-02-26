@@ -124,26 +124,14 @@
           <textarea id="descInput" rows="3" maxlength="500" placeholder="Optional notes"></textarea>
         </label>
 
-        <div class="row">
-          <label class="field">
-            <span>Reminder</span>
-            <select id="remindInput">
-              <option value="off">Off</option>
-              <option value="popup">Popup (Yesterday + Today)</option>
-            </select>
-            <div class="hint">Popup will show once per day for events with Reminder enabled.</div>
-          </label>
-  
-          <label class="field">
-            <span>Color</span>
-            <select id="colorInput">
-              <option value="default">Default</option>
-              <option value="red">Red</option>
-              <option value="blue">Blue</option>
-              <option value="green">Green</option>
-            </select>
-          </label>
-        </div>
+        <label class="field">
+          <span>Reminder</span>
+          <select id="remindInput">
+            <option value="off">Off</option>
+            <option value="popup">Popup (Yesterday + Today)</option>
+          </select>
+          <div class="hint">Popup will show once per day for events with Reminder enabled.</div>
+        </label>
 
         <div id="conflictBox" class="callout warn" hidden>
           <b>Conflict detected</b>
