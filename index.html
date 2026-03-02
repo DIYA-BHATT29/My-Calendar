@@ -19,7 +19,6 @@
     </div>
   </header>
 
-  <!-- Notification permission banner — shown by JS when permission is "default"  -->
   <div id="notifBanner" class="notif-banner" hidden>
     <span>🔔 Enable notifications to get reminders for your events — even when this tab is in the background.</span>
     <div class="notif-banner-actions">
@@ -34,10 +33,8 @@
         <div>
           <h2>Calendar</h2>
           <p class="muted">Click a date to view events. Select an event to Edit/Delete from the side.</p>
-
           <div class="monthbar">
             <button id="prevBtn" class="btn" type="button" aria-label="Previous month">←</button>
-
             <div class="month-year-group">
               <select id="monthSelect" class="month-select" aria-label="Select month">
                 <option value="0">January</option>
@@ -55,12 +52,10 @@
               </select>
               <select id="yearSelect" class="year-select" aria-label="Select year"></select>
             </div>
-
             <button id="nextBtn" class="btn" type="button" aria-label="Next month">→</button>
             <button id="todayBtn" class="btn ghost" type="button">Today</button>
           </div>
         </div>
-
         <div class="head-right">
           <input id="searchInput" class="search" type="search" placeholder="Search events…" />
           <button id="themeToggle" class="btn ghost" type="button">🌙 Dark</button>
@@ -68,13 +63,7 @@
       </div>
 
       <div class="dow">
-        <div>Sun</div>
-        <div>Mon</div>
-        <div>Tue</div>
-        <div>Wed</div>
-        <div>Thu</div>
-        <div>Fri</div>
-        <div>Sat</div>
+        <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
       </div>
 
       <div id="grid" class="grid" aria-label="Calendar grid"></div>
@@ -85,8 +74,12 @@
         <h2>Selected Day</h2>
         <p id="dayLabel" class="muted">—</p>
       </div>
+      <div id="selectedEvents" class="day-list"></div>
 
-      <div id="dayList" class="day-list"></div>
+      <div class="panel-head upcoming-heading">
+        <h2>Upcoming Events</h2>
+      </div>
+      <div id="upcomingEvents" class="day-list"></div>
 
       <div class="panel-foot">
         <button id="addBtn" class="btn primary" type="button">+ Add Event</button>
@@ -98,8 +91,8 @@
     </aside>
   </main>
 
-  <!-- Modal -->
   <div id="backdrop" class="backdrop" hidden></div>
+
   <dialog id="eventModal" class="modal" aria-labelledby="modalTitle">
     <form id="eventForm" class="modal-form" method="dialog">
       <div class="modal-head">
@@ -153,8 +146,7 @@
               <option value="30">🔔 Notify 30 mins before</option>
               <option value="15">🔔 Notify 15 mins before</option>
             </select>
-            <div class="hint">Passive (🔔) reminders fire as OS notifications even when the tab is backgrounded.
-              Requires notification permission.</div>
+            <div class="hint">Passive (🔔) reminders fire as OS notifications even when the tab is backgrounded. Requires notification permission.</div>
           </label>
 
           <label class="field">
@@ -187,5 +179,4 @@
 
   <script src="app.js"></script>
 </body>
-
 </html>
