@@ -11,7 +11,8 @@
         grid: $("grid"),
         searchInput: $("searchInput"),
         dayLabel: $("dayLabel"),
-        dayList: $("dayList"),
+        selectedEvents: $("selectedEvents"),
+        upcomingEvents: $("upcomingEvents"),
         noResults: $("noResults"),
 
         addBtn: $("addBtn"),
@@ -323,8 +324,15 @@
     }
 
     function renderDayPanel() {
-        const d = new Date(selectedDate + "T00:00:00");
-        els.dayLabel.textContent = d.toLocaleDateString(undefined, {
+        const selectedContainer = els.selectedEvents;
+        const upcomingContainer = els.upcomingEvents;
+
+        selectedContainer.innerHTML = "";
+        upcomingContainer.innerHTML = "";
+
+        const selected = new Date(selectedDate + "T00:00:00");
+
+        els.dayLabel.textContent = selected.toLocaleDateString(undefined, {
             weekday: "long",
             year: "numeric",
             month: "long",
@@ -332,55 +340,79 @@
         });
 
         const q = normalizeStr(els.searchInput.value).trim();
+
+        // ===== SELECTED DAY EVENTS =====
         const dayEvents = getEventsOnDate(selectedDate)
             .filter(ev => !q || formatSearch(ev).includes(q))
             .sort((a, b) => (a.start || "").localeCompare(b.start || ""));
 
-        els.dayList.innerHTML = "";
-
         if (!dayEvents.length) {
-            const empty = document.createElement("div");
-            empty.className = "day-item";
-            empty.innerHTML = `<div class="top"><div class="title">No events</div><div class="tag">—</div></div><div class="meta">Click "Add Event" to create one.</div>`;
-            empty.addEventListener("click", () => openModalForDate(selectedDate));
-            els.dayList.appendChild(empty);
-            return;
+            selectedContainer.innerHTML = `<div class="day-item">No events for this day.</div>`;
+        } else {
+            dayEvents.forEach(ev => {
+                const item = createEventCard(ev);
+                selectedContainer.appendChild(item);
+            });
         }
 
-        dayEvents.forEach(ev => {
-            const item = document.createElement("div");
-            item.className = "day-item" + (selectedEventId === ev.id ? " selected" : "");
-            if (ev.color && ev.color !== "default") {
-                item.dataset.color = ev.color;
-            }
+        // ===== UPCOMING EVENTS =====
+        const upcoming = events
+            .filter(ev => ev.date > selectedDate)
+            .sort((a, b) => a.date.localeCompare(b.date))
+            .slice(0, 5);
 
-            let tag = "All day";
-            if (ev.start && ev.end) {
-                if (ev.endDate && ev.endDate !== ev.date) {
-                    tag = `${ev.start} – ${ev.end}`;
-                } else {
-                    tag = `${ev.start}–${ev.end}`;
-                }
-            }
+        if (!upcoming.length) {
+            upcomingContainer.innerHTML = `<div class="day-item">No upcoming events.</div>`;
+        } else {
+            upcoming.forEach(ev => {
+                const item = createEventCard(ev, true);
+                upcomingContainer.appendChild(item);
+            });
+        }
+    }
 
-            item.innerHTML = `
-                <div class="top">
+    function createEventCard(ev, showDate = false) {
+        const item = document.createElement("div");
+        item.className = "day-item";
+
+        if (ev.color && ev.color !== "default") {
+            item.dataset.color = ev.color;
+        }
+
+        let tag = "All day";
+        if (ev.start && ev.end) {
+            tag = `${ev.start} – ${ev.end}`;
+        }
+
+        const dateText = showDate ? `<div class="meta">${ev.date}</div>` : "";
+
+        item.innerHTML = `
+            <div class="event-row">
+                <div class="event-info">
                     <div class="title">${escapeHtml(ev.title)}</div>
+                    ${dateText}
                     <div class="tag">${escapeHtml(tag)}</div>
                 </div>
-                <div class="meta">
-                    ${ev.remindMode === "popup" ? "🔔 Popup reminder enabled<br/>" : ""}
-                    ${ev.description ? escapeHtml(ev.description) : ""}
+
+                <div class="event-actions">
+                    <button class="pill-btn edit-btn">Edit</button>
+                    <button class="pill-btn delete-btn">Delete</button>
                 </div>
-            `;
+            </div>
+        `;
 
-            item.addEventListener("click", () => {
-                selectedEventId = ev.id;
-                renderDayPanel();
-            });
-
-            els.dayList.appendChild(item);
+        item.querySelector(".edit-btn").addEventListener("click", (e) => {
+            e.stopPropagation();
+            openModalForEdit(ev.id);
         });
+
+        item.querySelector(".delete-btn").addEventListener("click", (e) => {
+            e.stopPropagation();
+            editingId = ev.id;
+            onDelete();
+        });
+
+        return item;
     }
 
     // ---------- MODAL ----------
@@ -721,7 +753,7 @@
                 borderRadius: "999px",
                 fontWeight: "900",
                 fontSize: "12px",
-                zIndex: "100",
+                zIndex: "9999",
                 maxWidth: "calc(100% - 24px)",
                 textAlign: "center"
             });
