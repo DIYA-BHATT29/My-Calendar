@@ -939,6 +939,80 @@ body.dark .event-chip[data-color="green"] b,
 body.dark .event-chip[data-color="green"] .t {
   color: #86efac;
 }
+
+/* ── Notification Permission Banner ──────────────────────────────────────── */
+.notif-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 14px 20px;
+  background: linear-gradient(135deg, #ede9fe, #fce7f3);
+  border-bottom: 1px solid rgba(185,164,255,0.4);
+  font-size: 14px;
+  font-weight: 600;
+  color: #4b3f6b;
+}
+
+/* hidden attribute must always win over display:flex */
+.notif-banner[hidden] {
+  display: none !important;
+}
+
+.notif-banner-actions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.notif-banner .btn.primary {
+  padding: 8px 18px;
+  font-size: 13px;
+}
+
+.notif-banner .btn.ghost {
+  padding: 8px 14px;
+  font-size: 13px;
+}
+
+body.dark .notif-banner {
+  background: linear-gradient(135deg, #1e1b33, #2d1e2f);
+  border-bottom-color: #475569;
+  color: #e2e8f0;
+}
+
+/* ── Selected day-item highlight (issue #32) ─────────────────────────────── */
+.day-item.selected {
+  border: 2px solid var(--primary);
+  background: rgba(185, 164, 255, 0.18);
+  box-shadow: 0 0 0 3px rgba(185, 164, 255, 0.25), 0 8px 20px rgba(185, 164, 255, 0.2);
+  transform: translateY(-2px) scale(1.01);
+}
+
+.day-item.selected .title {
+  background: linear-gradient(145deg, #6c3fc5, #b9a4ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.day-item.selected .tag {
+  background: rgba(185, 164, 255, 0.4);
+  border-color: rgba(185, 164, 255, 0.6);
+  color: #6c3fc5;
+}
+
+body.dark .day-item.selected {
+  border-color: #7c9cff;
+  background: rgba(124, 156, 255, 0.15);
+  box-shadow: 0 0 0 3px rgba(124, 156, 255, 0.2), 0 8px 20px rgba(124, 156, 255, 0.15);
+}
+
+body.dark .day-item.selected .tag {
+  background: rgba(124, 156, 255, 0.25);
+  border-color: rgba(124, 156, 255, 0.5);
+  color: #93c5fd;
+}
 /* ---------- RECURRING EVENT STYLING ---------- */
 
 /* Container for the checkbox and label */
