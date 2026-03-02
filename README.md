@@ -4,9 +4,6 @@
 
 🔗 **Live Demo:** [Click Here](https://nimamaria.github.io/My-Calendar/)
 
-**Demo Video:**
-<video controls src="Recording 2026-02-26 223615 (1).mp4" title="Title"></video>
-
 
 A lightweight calendar app for managing events. No bloat—just a clean calendar that works in your browser.
 

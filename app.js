@@ -611,10 +611,12 @@
         const weekdayTimePatterns = {};
 
         events.forEach(ev => {
+            // Count title usage
             if (ev.title) {
                 titleFrequency[ev.title] = (titleFrequency[ev.title] || 0) + 1;
             }
 
+            // Track weekday + time pattern
             if (ev.start && ev.end) {
                 const weekday = new Date(ev.date + "T00:00:00").getDay();
 
